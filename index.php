@@ -37,6 +37,16 @@ and open the template in the editor.
               });
           });
        });
+       
+       $(document).ready(function(){
+            var commentCount=2;
+          $('button').click(function(){
+             commentCount+=2;
+             $("#comments").load("load-comments.php",{
+                 commentNewCount:commentCount
+             }); 
+          }); 
+       });
     </script>
     
     <body>
@@ -55,6 +65,27 @@ and open the template in the editor.
             <button id="mail-submit" type="submit" name="submit"> Send form !!!</button>
             <p class="form-message"></p>
         </form>
+        <br><br><br>
         
+       //////////////............/////////////// 
+       
+        <div id="comments">
+            <?php
+                $sql="select * from comments limit 2";
+                $result=mysqli_query($conn,$sql);
+                if(mysqli_num_rows($result)>0){
+                    while($row=mysqli_fetch_assoc($result)){
+                        echo "<p>";
+                        echo $row['author'];
+                        echo "<br>";
+                        echo $row['message'];
+                        echo "<p>";
+                    }
+                }else{
+                    echo "there are no comments";
+                }
+                ?>
+        </div>
+        <button>show more comments</button>
     </body>
 </html>
