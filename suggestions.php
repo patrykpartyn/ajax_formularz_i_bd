@@ -7,7 +7,7 @@
  */
 
 
-$existingName=array("alala","daniel","denis","jane","blame","patruik","sttrarti","wojtek");
+$existingName=array("ala","daniel","denis","jane","blame","patruik","sttrarti","wojtek");
 if(isset($_POST['suggestion'])){
     $name=$_POST['suggestion'];
     if(!empty($name)){

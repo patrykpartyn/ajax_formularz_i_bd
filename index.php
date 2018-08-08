@@ -21,6 +21,31 @@ and open the template in the editor.
     </head>
     <script>
        $(document).ready(function(){
+           $("#mail-name").keyup(function(){
+               var nameCheck=$("#mail-name").val();
+               $.post("suggestions.php",{
+                   suggestion:nameCheck
+               },function(data,status){
+                   $(".test").html(data);
+               });
+           });
+           
+           var commentCount=2;
+          $('#btnComments').click(function(){
+             commentCount+=2;
+             $("#comments").load("load-comments.php",{
+                 commentNewCount:commentCount
+             }); 
+          }); 
+           
+           
+            $("#plikBtn").click(function(){
+            $.get("test.txt",function(data,status){
+                $(".txt").html(data);});
+          });
+           
+           
+           
           $("form").submit(function(event){
               event.preventDefault();
               var name=$("#mail-name").val();
@@ -36,22 +61,20 @@ and open the template in the editor.
                   submit:submit
               });
           });
-       });
+          
+         
        
-       $(document).ready(function(){
-            var commentCount=2;
-          $('button').click(function(){
-             commentCount+=2;
-             $("#comments").load("load-comments.php",{
-                 commentNewCount:commentCount
-             }); 
-          }); 
-       });
+       
+
     </script>
     
     <body>
         <form>
             <input id="mail-name" type="text" name="name" placeholder="full name">
+            <br><br>
+            <br><br>
+            <br><br>
+            <p class="test"></p>
             <br><br>
             <input id="mail-email" type="text" name="email" placeholder="E-mail">
             <br><br>
@@ -86,6 +109,22 @@ and open the template in the editor.
                 }
                 ?>
         </div>
-        <button>show more comments</button>
+        <button id="btnComments">show more comments</button>
+        
+        <br><br>
+        <button id="plikBtn">Get txt document</button>
+        <br><br><br><br><br><br>
+        <p class="txt"></p>
+        
+        
+        /////////////////////////////////.................///////////////////////////////////////
+        
+<!--        <form id="addCommentForm">
+            <input id="author" type="text" name="author" placeholder="write you nick">
+            <textarea id="commentsPost" name="commentsPost" placeholder="write your comment here..........."></textarea>
+            <button id="commentSubmit" type="button">ADD YOUR COMMENT</button>
+            <p class="messageCommentAdded"></p>
+            
+        </form>-->
     </body>
 </html>
